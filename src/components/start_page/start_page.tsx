@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from "react";
 
 import { Box, Button, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
 import image1 from "../../assets/image1.jpeg";
 import image2 from "../../assets/image2.png";
 import image3 from "../../assets/image3.jpeg";
 import image4 from "../../assets/image4.jpeg";
+import { setUsers } from "../../store/action_creators";
+import { Wrapper, Slider, ButtonsBlock } from "./styles";
 
 export const StartPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [photo, setPhoto] = useState(1);
+
+  const checkLocalStorage = () => {
+    localStorage.setItem("test", JSON.stringify([1, "test", { name: "test" }]));
+    const users = localStorage.getItem("users");
+    if (users) {
+      dispatch(setUsers(JSON.parse(users)));
+    }
+  };
 
   const change = () => {
     if (photo === 4) {
@@ -46,6 +57,10 @@ export const StartPage = () => {
       clearInterval(interval);
     };
   }, [photo]);
+
+  useEffect(() => {
+    checkLocalStorage();
+  }, []);
 
   return (
     <Wrapper>
@@ -84,34 +99,3 @@ export const StartPage = () => {
     </Wrapper>
   );
 };
-
-const Slider = styled.div`
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100vh;
-  opacity: 0.5;
-  transition: opacity all 1s ease-in;
-  position: absolute;
-`;
-
-const ButtonsBlock = styled.div`
-  width: 300px;
-  height: 300px;
-  padding: 1rem;
-  opacity: 1;
-  background-color: #00000093;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-`;

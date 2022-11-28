@@ -3,9 +3,11 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
+import { LoginUser, MoviesDBStore, User } from "../../interfaces";
 import { Wrapper, Form } from "./styles";
 
 const validationSchema = yup.object({
@@ -23,6 +25,21 @@ const validationSchema = yup.object({
 });
 
 export const Login = () => {
+  const store = useSelector((state: MoviesDBStore) => state.users);
+  const navigate = useNavigate();
+
+  const checkUserCreds = (val: LoginUser) => {
+    const includes =
+      store.filter(
+        (item) => item.email === val.email && item.password === val.password
+      ).length > 0;
+    if (includes) {
+      navigate("/movies");
+    } else {
+      alert("user not registered");
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -30,12 +47,11 @@ export const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      checkUserCreds(values);
     },
   });
   const imgUrl =
     "https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1759&q=80";
-  const navigate = useNavigate();
 
   return (
     <Box
