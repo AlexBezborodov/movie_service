@@ -1,16 +1,18 @@
 import React from "react";
 
 import "./App.css";
+import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Login } from "./components/login";
 import { Movies } from "./components/movies";
 import { Signup } from "./components/signup";
 import { StartPage } from "./components/start_page";
+import { store } from "./store/store";
 
 function App() {
   return (
-    <div>
+    <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<StartPage />} />
@@ -19,7 +21,7 @@ function App() {
           <Route path="/movies" element={<Movies />} />
         </Routes>
       </Router>
-    </div>
+    </Provider>
   );
 }
 
