@@ -1,9 +1,14 @@
-import { SET_USERS, SIGNUP, SET_CURRENT_USER } from "../action_type_constants";
+import {
+  SET_USERS,
+  SIGNUP,
+  SET_CURRENT_USER,
+  LOGOUT,
+} from "../action_type_constants";
 import { MoviesDBStore } from "./../../interfaces";
 
 const initialState: MoviesDBStore = {
   users: [],
-  currentUser: [],
+  currentUser: {},
 };
 
 export function rootReducer(state: MoviesDBStore = initialState, action: any) {
@@ -15,6 +20,8 @@ export function rootReducer(state: MoviesDBStore = initialState, action: any) {
       return { ...state, users: state.users.concat(payload) };
     case SET_CURRENT_USER:
       return { ...state, currentUser: payload };
+    case LOGOUT:
+      return { ...state, currentUser: [] };
     default:
       return state;
   }

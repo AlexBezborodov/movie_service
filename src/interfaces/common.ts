@@ -11,5 +11,12 @@ export interface User {
 }
 export interface MoviesDBStore {
   users: User[] | [];
-  currentUser: User[] | [];
+  currentUser: User | {};
+}
+export interface RegistrationForm {
+  name: string;
+  nickName: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
 }

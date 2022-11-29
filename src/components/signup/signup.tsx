@@ -3,22 +3,23 @@ import React, { useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-import { User } from "../../interfaces";
+import { MoviesDBStore, RegistrationForm } from "../../interfaces";
 import { register, setCurrentUser } from "../../store/action_creators";
 import { Wrapper, Form } from "./styles";
 
 export const Signup = () => {
+  const users = useSelector((state: MoviesDBStore) => state.users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const imgUrl =
     "https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1779&q=80";
 
-  const registerNewUser = (val: User) => {
+  const registerNewUser = (val: RegistrationForm) => {
     let date = new Date();
     const newUser = {
       ...val,
@@ -27,6 +28,8 @@ export const Signup = () => {
     dispatch(register(newUser));
     dispatch(setCurrentUser(newUser));
     navigate("/movies");
+    localStorage.setItem("users", JSON.stringify([...users, newUser]));
+    localStorage.removeItem("tempRegistration");
   };
 
   const setInitValues = () => {
@@ -54,7 +57,7 @@ export const Signup = () => {
   const formik = useFormik({
     initialValues: setInitValues(),
     validationSchema: validationSchema,
-    onSubmit: (values: any) => {
+    onSubmit: (values: RegistrationForm) => {
       delete values.confirmPassword;
       registerNewUser(values);
     },
