@@ -15,7 +15,6 @@ export const Movies = () => {
 
   const [movies, setMovies] = useState([]);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  console.log("currentUser", currentUser);
 
   const isEmpty = (obj: any) => {
     return Object.keys(obj).length === 0;
@@ -49,6 +48,7 @@ export const Movies = () => {
   useEffect(() => {
     getMovies();
     !isEmpty(currentUser) && showCongrats();
+    !isEmpty(currentUser) && localStorage.removeItem("tempRegistration");
   }, []);
 
   return (

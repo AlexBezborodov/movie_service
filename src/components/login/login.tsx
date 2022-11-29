@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
+import { BasicAlert } from "../../alert";
 import { LoginUser, MoviesDBStore } from "../../interfaces";
 import { setCurrentUser } from "../../store/action_creators";
 import { Wrapper, Form } from "./styles";
@@ -30,6 +31,15 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+
+  const showCongrats = () => {
+    setIsOpenAlert(true);
+    setTimeout(() => {
+      setIsOpenAlert(false);
+    }, 5000);
+  };
+
   const checkUserCreds = (val: LoginUser) => {
     const includes =
       store.filter(
@@ -43,7 +53,7 @@ export const Login = () => {
       localStorage.setItem("currentUser", JSON.stringify(user));
       dispatch(setCurrentUser(user));
     } else {
-      alert("user not registered");
+      showCongrats();
     }
   };
 
@@ -105,6 +115,11 @@ export const Login = () => {
           </form>
         </Form>
       </Wrapper>
+      <BasicAlert
+        text="User does not exist"
+        isShow={isOpenAlert}
+        severity="error"
+      />
     </Box>
   );
 };
