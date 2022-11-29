@@ -3,19 +3,19 @@ export interface LoginUser {
   password: string;
 }
 export interface User {
-  id: number;
-  name: string;
-  nickName: string;
-  email: string;
-  password: string;
+  id?: number;
+  name?: string;
+  nickName?: string;
+  email?: string;
+  password?: string;
 }
 export interface MoviesDBStore {
   users: User[] | [];
-  currentUser: User | {};
+  currentUser: User;
   movies: any;
 }
 export interface RegistrationForm {
-  name: string;
+  name?: string;
   nickName: string;
   email: string;
   password: string;

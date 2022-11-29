@@ -37,14 +37,11 @@ export const Login = () => {
       ).length > 0;
     if (includes) {
       navigate("/movies");
-      localStorage.setItem("isLogged", "true");
-      dispatch(
-        setCurrentUser(
-          store.filter(
-            (item) => item.email === val.email && item.password === val.password
-          )[0]
-        )
-      );
+      const user = store.filter(
+        (item) => item.email === val.email && item.password === val.password
+      )[0];
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      dispatch(setCurrentUser(user));
     } else {
       alert("user not registered");
     }

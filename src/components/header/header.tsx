@@ -28,6 +28,7 @@ export const Header: FC<any> = ({ currentUser }) => {
   const handleLogout = () => {
     navigate("/");
     dispatch(logout());
+    localStorage.removeItem("currentUser");
   };
 
   const handleClick = () => {

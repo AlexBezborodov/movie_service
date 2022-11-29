@@ -7,9 +7,11 @@ import {
 } from "../action_type_constants";
 import { MoviesDBStore } from "./../../interfaces";
 
+const user = localStorage.getItem("currentUser");
+
 const initialState: MoviesDBStore = {
   users: [],
-  currentUser: {},
+  currentUser: user ? JSON.parse(user) : {},
   movies: moviesDb.movies,
 };
 

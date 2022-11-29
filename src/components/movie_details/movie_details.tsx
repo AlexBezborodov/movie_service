@@ -30,7 +30,7 @@ export const MovieDetails: FC<MovieDetailProps> = ({ movie, size }) => {
     autoplaySpeed: 2000,
     arrows: true,
     fade: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
