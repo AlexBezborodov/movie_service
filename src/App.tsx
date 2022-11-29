@@ -10,6 +10,9 @@ import { Signup } from "./components/signup";
 import { StartPage } from "./components/start_page";
 import { store } from "./store/store";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 function App() {
   return (
     <Provider store={store}>

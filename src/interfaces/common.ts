@@ -12,6 +12,7 @@ export interface User {
 export interface MoviesDBStore {
   users: User[] | [];
   currentUser: User | {};
+  movies: any;
 }
 export interface RegistrationForm {
   name: string;

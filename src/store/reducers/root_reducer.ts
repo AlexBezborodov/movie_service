@@ -1,3 +1,4 @@
+import moviesDb from "../../db/db.json";
 import {
   SET_USERS,
   SIGNUP,
@@ -9,6 +10,7 @@ import { MoviesDBStore } from "./../../interfaces";
 const initialState: MoviesDBStore = {
   users: [],
   currentUser: {},
+  movies: moviesDb.movies,
 };
 
 export function rootReducer(state: MoviesDBStore = initialState, action: any) {
