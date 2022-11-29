@@ -9,7 +9,7 @@ export const register = (payload: User) => ({
   type: SIGNUP,
   payload,
 });
-export const getCurrentUser = (payload: User) => ({
+export const setCurrentUser = (payload: User) => ({
   type: SET_CURRENT_USER,
   payload,
 });

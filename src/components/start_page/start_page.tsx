@@ -17,7 +17,6 @@ export const StartPage = () => {
   const [photo, setPhoto] = useState(1);
 
   const checkLocalStorage = () => {
-    localStorage.setItem("test", JSON.stringify([1, "test", { name: "test" }]));
     const users = localStorage.getItem("users");
     if (users) {
       dispatch(setUsers(JSON.parse(users)));

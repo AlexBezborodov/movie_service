@@ -3,11 +3,12 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-import { LoginUser, MoviesDBStore, User } from "../../interfaces";
+import { LoginUser, MoviesDBStore } from "../../interfaces";
+import { setCurrentUser } from "../../store/action_creators";
 import { Wrapper, Form } from "./styles";
 
 const validationSchema = yup.object({
@@ -26,6 +27,7 @@ const validationSchema = yup.object({
 
 export const Login = () => {
   const store = useSelector((state: MoviesDBStore) => state.users);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const checkUserCreds = (val: LoginUser) => {
@@ -35,6 +37,14 @@ export const Login = () => {
       ).length > 0;
     if (includes) {
       navigate("/movies");
+      localStorage.setItem("isLogged", "true");
+      dispatch(
+        setCurrentUser(
+          store.filter(
+            (item) => item.email === val.email && item.password === val.password
+          )[0]
+        )
+      );
     } else {
       alert("user not registered");
     }
