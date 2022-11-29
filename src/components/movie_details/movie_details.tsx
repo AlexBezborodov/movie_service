@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 
+import ThumbUpTwoToneIcon from "@mui/icons-material/ThumbUpTwoTone";
 import { Typography } from "@mui/material";
 import Slider from "react-slick";
 
@@ -11,6 +12,7 @@ import {
   SliderElement,
   AboutMovie,
   TitleWrapper,
+  Rating,
 } from "./styles";
 
 interface MovieDetailProps {
@@ -57,10 +59,17 @@ export const MovieDetails: FC<MovieDetailProps> = ({ movie, size }) => {
       <MovieName>
         <h3>{movie.title}</h3>
         <span>{movie.genres.toString()}</span>
-        <span>{movie.year}</span>
+        <Rating>
+          <span>IMDB rating: {movie.imdb}</span>
+          {+movie.imdb >= 7 && <ThumbUpTwoToneIcon style={{ color: "gold" }} />}
+        </Rating>
+
         <div>
           <p>
             <b>Director:</b> {movie.director}
+          </p>
+          <p>
+            <b>Year:</b> {movie.year}
           </p>
           <p>
             <b>Actors:</b> {movie.actors}
@@ -75,11 +84,21 @@ export const MovieDetails: FC<MovieDetailProps> = ({ movie, size }) => {
         <TitleWrapper>
           <h1>{movie.title}</h1>
           <Typography>{movie.genres.toString()}</Typography>
+          <Rating>
+            <span>IMDB rating: {movie.imdb}</span>
+            {+movie.imdb >= 7 && (
+              <ThumbUpTwoToneIcon style={{ color: "black" }} />
+            )}
+          </Rating>
           <span>{movie.year} year</span>
         </TitleWrapper>
 
         <SliderWrapper>
           <Slider {...settings}>
+            {movie.screenshots &&
+              movie.screenshots.map((screen: string, index: number) => (
+                <SliderElement key={index} img={screen} />
+              ))}
             <SliderElement img={movie.posterUrl} />
             <SliderElement img={movie.posterUrl} />
             <SliderElement img={movie.posterUrl} />

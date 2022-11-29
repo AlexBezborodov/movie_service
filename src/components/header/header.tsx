@@ -19,7 +19,6 @@ export const Header: FC<any> = ({ currentUser }) => {
   const isContinueReg = TempRegistration
     ? "Continue registration"
     : "Go to register";
-  console.log("current user", currentUser);
 
   const isEmpty = (obj: any) => {
     return Object.keys(obj).length === 0;

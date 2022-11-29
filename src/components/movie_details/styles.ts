@@ -62,7 +62,7 @@ export const Pin = styled.div<Props>`
 `;
 export const SliderWrapper = styled.div`
   max-width: 900px;
-  width: 100%;
+  width: 95%;
   min-height: 500px;
   position: relative;
   border-radius: 1rem;
@@ -100,5 +100,13 @@ export const TitleWrapper = styled.div`
   color: #fff;
   h1 {
     margin: 0px;
+  }
+`;
+export const Rating = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    margin: 6px 10px 0;
   }
 `;
