@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
 
 import { BasicAlert } from "../../alert";
-import { MoviesDBStore } from "../../interfaces";
+import { Movie, MoviesDBStore, User } from "../../interfaces";
 import { Header } from "../header";
 import { MovieDetails } from "../movie_details";
 import { PinterestLayout } from "./styles";
@@ -13,10 +13,10 @@ export const Movies = () => {
   const currentUser = useSelector((state: MoviesDBStore) => state.currentUser);
   const moviesData = useSelector((state: MoviesDBStore) => state.movies);
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<Movie[] | []>([]);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
-  const isEmpty = (obj: any) => {
+  const isEmpty = (obj: User) => {
     return Object.keys(obj).length === 0;
   };
 

@@ -6,8 +6,7 @@ export const PinterestLayout = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 280px);
   grid-auto-rows: 10px;
-  background-color: black;
-  border: 1px solid yellow;
+  background-color: transparent;
   max-width: 1400px;
   border-radius: 16px;
 `;

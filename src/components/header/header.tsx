@@ -9,9 +9,14 @@ import Toolbar from "@mui/material/Toolbar";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { User } from "../../interfaces";
 import { logout } from "../../store/action_creators";
 
-export const Header: FC<any> = ({ currentUser }) => {
+interface CurrentUserProps {
+  currentUser: User;
+}
+
+export const Header: FC<CurrentUserProps> = ({ currentUser }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,7 +25,7 @@ export const Header: FC<any> = ({ currentUser }) => {
     ? "Continue registration"
     : "Go to register";
 
-  const isEmpty = (obj: any) => {
+  const isEmpty = (obj: User) => {
     return Object.keys(obj).length === 0;
   };
   const btnName = isEmpty(currentUser) ? isContinueReg : "Log out";

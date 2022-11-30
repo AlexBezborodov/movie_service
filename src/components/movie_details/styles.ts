@@ -63,7 +63,7 @@ export const Pin = styled.div<Props>`
 export const SliderWrapper = styled.div`
   max-width: 900px;
   width: 95%;
-  min-height: 500px;
+  min-height: 600px;
   position: relative;
   border-radius: 1rem;
   margin: 0 auto;

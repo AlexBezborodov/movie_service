@@ -4,6 +4,7 @@ import ThumbUpTwoToneIcon from "@mui/icons-material/ThumbUpTwoTone";
 import { Typography } from "@mui/material";
 import Slider from "react-slick";
 
+import { Movie } from "../../interfaces";
 import { CustomModal } from "../custom_modal";
 import {
   Pin,
@@ -16,7 +17,7 @@ import {
 } from "./styles";
 
 interface MovieDetailProps {
-  movie: any;
+  movie: Movie;
   size: string;
 }
 
